@@ -46,7 +46,7 @@ setTimeout( function(){document.querySelector("#main-content > article > div.cen
 setTimeout( function get_code(){
 GM_xmlhttpRequest({
     method: "GET",
-    url: 'https://daisysms.com/stubs/handler_api.php?api_key=unSpOrrT7ebF3H1GhT3ibpUDuLPKfk&action=getStatus&id=' + match[1],
+    url: 'https://daisysms.com/stubs/handler_api.php?api_key=vUwcZpeVYuDygxflOYhJsceZullKpW&action=getStatus&id=' + match[1],
     onload: function(response) {
         console.log(response.responseText)
         var bodyContent = response.responseText; // Obtiene el contenido de la respuesta
@@ -64,7 +64,7 @@ document.querySelector("#main-content > article > div.center-column > section > 
 //marcar como realizado
 GM_xmlhttpRequest({
     method: "GET",
-    url: `https://daisysms.com/stubs/handler_api.php?api_key=unSpOrrT7ebF3H1GhT3ibpUDuLPKfk&action=setStatus&id=${match[1]}&status=6`,
+    url: `https://daisysms.com/stubs/handler_api.php?api_key=vUwcZpeVYuDygxflOYhJsceZullKpW&action=setStatus&id=${match[1]}&status=6`,
     onload: function(response) {
 
         console.log(response.responseText)

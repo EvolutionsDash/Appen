@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         White caucasian NC
+// @name         Siempre Prueba de server Full
 // @namespace    http://tampermonkey.net/
 // @version      0.1
 // @description  Ejemplo
@@ -360,7 +360,7 @@ var select_education = document.querySelector('[formcontrolname="education_id"]'
             var Graduate_or_professional_degree = "5a1abe67-353f-4101-ba98-f086bfbdf71e"
             var prefer_not_answer = "8ecd787f-6803-4d87-ae9c-3737c55eccf6"
 //colocar en value la opcion deseada
-var value_option = select_education.querySelector('option[value="5a1abe67-353f-4101-ba98-f086bfbdf71e"]'); //Graduate_or_professional_degree por defecto
+var value_option = select_education.querySelector('option[value="90cf49cf-89f4-44a7-bec5-461b3561317f"]');
 value_option.selected = true;
 select_education.dispatchEvent(event);
 }
@@ -426,7 +426,7 @@ var select_size_of_household = document.querySelector('[formcontrolname="househo
     var cuatro = "409ac301-5777-4c23-81dd-8fc098419de0"
     var cinco_mas = "428127c4-34e7-4973-8c7d-f5cbd009031f"
 
-value_option = select_size_of_household.querySelector('option[value="409ac301-5777-4c23-81dd-8fc098419de0"]'); // 4 POR DEFECTO
+value_option = select_size_of_household.querySelector('option[value="06620023-41bd-4b97-92f1-ee2e9df44a62"]'); // 3 POR DEFECTO
 value_option.selected = true;
 select_size_of_household.dispatchEvent(event);
 
@@ -464,7 +464,7 @@ var select_combined_household_income = document.querySelector('[formcontrolname=
     var $150000_or_more = "40c7d945-55e8-4883-8daa-849a7647d4ec"
     var I_prefer_not_to_answerr = "0a64e748-cab4-4f00-8489-e0c280127138"
 
-value_option = select_combined_household_income.querySelector('option[value="16bad03e-b8f1-4131-89f6-50df8417eae1"]'); //   $75000_$99999  POR DEFECTO
+value_option = select_combined_household_income.querySelector('option[value="54682b61-85e0-465a-806f-32ab6dc3a374"]');
 value_option.selected = true;
 select_combined_household_income.dispatchEvent(event);
 

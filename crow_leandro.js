@@ -48,7 +48,7 @@ if (existe){
 document.querySelector(".button-cta").click()
 
 setTimeout( function(){
-//document.querySelector("#divContainer > div > div:nth-child(1) > app-tile > button > div.ng-star-inserted > span").click()
+document.querySelector("#divContainer > div > div:nth-child(1) > app-tile > button > div.ng-star-inserted > span").click()
 },7000)
 
 }
@@ -56,7 +56,7 @@ if (text){
 const spanText = document.querySelector("div > div.head-container > app-action-modal-header > div > div > p").innerText
 if(spanText === "Crowdtap 101: Question Types" || spanText === "Crowdtap 101: Survey Types" || spanText === "Crowdtap 101: Your Crowdtap Habits"){
 }else{
-document.querySelector("div > div.head-container > app-action-modal-header > div > button").click();
+//document.querySelector("div > div.head-container > app-action-modal-header > div > button").click();
     }
 }
 

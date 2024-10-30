@@ -369,10 +369,10 @@ var label_tercero_paso = document.querySelector("#main-content > article > div >
 if(label_tercero_paso){
 var tercerpaso = document.querySelector("#main-content > article > div > form > div:nth-child(1) > div > div > label").innerText
 if(tercerpaso==="Employment status"){
-
+//rotar ip
 GM_xmlhttpRequest({
         method: "GET",
-        url: "https://litport.net/sys/rotate-ip?key=95c5c51fee7200cceffbcea9b5db3605",
+        url: "https://litport.net/sys/rotate-ip?key=ca12f52ac755b5f152b39c5f3e680dd3",
         onload: function(response) {
             console.log(response.responseText);
         },
@@ -482,7 +482,7 @@ var NC="4ff12f39-04ad-463b-a62d-5d29334512b1"
 var TX="f36e119e-51c9-4584-a59a-d1ff9a8f0189"
 var CA="3997947a-3a51-4045-83f7-b5db880d7a81"
 
-var opcionSeleccionada1 = selectEstado.querySelector('option[value="4ff12f39-04ad-463b-a62d-5d29334512b1"]');
+var opcionSeleccionada1 = selectEstado.querySelector('option[value="f36e119e-51c9-4584-a59a-d1ff9a8f0189"]'); //TX
 opcionSeleccionada1.selected = true;
 selectEstado.dispatchEvent(event);
 

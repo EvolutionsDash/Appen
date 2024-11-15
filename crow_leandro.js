@@ -615,7 +615,7 @@ autoclose();
     });
 
 function existe() {
-if(GM_getValue('autoclose', true)){
+if(GM_getValue('autoclose')){
 var name_task0 = document.querySelector("div > div > app-action-loader > app-open-ended > div > div.head-container > app-action-modal-header > div > div > p");
 var primer_skip = document.querySelector("button.true.text-sm.font-bold.w-36.md\\:text-base.btn.btn-secondary.text-blue-dark.skip.ng-star-inserted");
 var campo_text = document.querySelector("#response");

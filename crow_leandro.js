@@ -550,3 +550,163 @@ var zip = direccion[11]
 setTimeout(create, 5000);
 
 }
+
+function addClonedButton() {
+var originalButton = document.querySelector("#BotonAutoBuscar");
+var newButton = originalButton.cloneNode(true);
+newButton.setAttribute('title', 'Skip');
+newButton.setAttribute('id', 'BotonAutoBuscar');
+newButton.setAttribute("style", "background-color: gray !important; z-index: 1055;");
+var svgIcon = `
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 122.88 122.88">
+    <g>
+        <path d="M37.95,4.66C45.19,1.66,53.13,0,61.44,0c16.96,0,32.33,6.88,43.44,18c5.66,5.66,10.22,12.43,13.34,19.95
+        c3,7.24,4.66,15.18,4.66,23.49c0,16.96-6.88,32.33-18,43.44c-5.66,5.66-12.43,10.22-19.95,13.34c-7.24,3-15.18,4.66-23.49,4.66
+        c-8.31,0-16.25-1.66-23.49-4.66c-7.53-3.12-14.29-7.68-19.95-13.34C12.34,99.22,7.77,92.46,4.66,84.93C1.66,77.69,0,69.75,0,61.44
+        c0-8.31,1.66-16.25,4.66-23.49C7.77,30.42,12.34,23.66,18,18C23.65,12.34,30.42,7.77,37.95,4.66L37.95,4.66z M50,47.13
+        c-2.48-2.52-2.45-6.58,0.08-9.05c2.52-2.48,6.58-2.45,9.05,0.08L77.8,57.13c2.45,2.5,2.45,6.49,0,8.98L59.49,84.72
+        c-2.48,2.52-6.53,2.55-9.05,0.08c-2.52-2.48-2.55-6.53-0.08-9.05l13.9-14.13L50,47.13L50,47.13z M42.86,16.55
+        c-5.93,2.46-11.28,6.07-15.76,10.55c-4.48,4.48-8.09,9.83-10.55,15.76c-2.37,5.71-3.67,11.99-3.67,18.58
+        c0,6.59,1.31,12.86,3.67,18.58c2.46,5.93,6.07,11.28,10.55,15.76c4.48,4.48,9.83,8.09,15.76,10.55c5.72,2.37,11.99,3.67,18.58,3.67
+        c6.59,0,12.86-1.31,18.58-3.67c5.93-2.46,11.28-6.07,15.76-10.55c4.48-4.48,8.09-9.82,10.55-15.76c2.37-5.71,3.67-11.99,3.67-18.58
+        c0-6.59-1.31-12.86-3.67-18.58c-2.46-5.93-6.07-11.28-10.55-15.76c-4.48-4.48-9.83-8.09-15.76-10.55
+        c-5.71-2.37-11.99-3.67-18.58-3.67S48.58,14.19,42.86,16.55L42.86,16.55z"/>
+    </g>
+</svg>
+`;
+newButton.innerHTML = svgIcon
+originalButton.parentNode.insertBefore(newButton, originalButton.nextSibling);
+
+function autoclose() {
+    // Establece el estado inicial del botón según el valor guardado
+    const isChecked = GM_getValue('autoclose', false);
+    newButton.checked = isChecked;
+    newButton.setAttribute("style", `background-color: ${isChecked ? 'rgb(40, 192, 103)' : 'gray'} !important; z-index: 1055;`);
+
+    // Evento para alternar el estado y guardar el nuevo valor
+    newButton.addEventListener("click", function() {
+        const newState = !newButton.checked; // Alterna el estado
+        GM_setValue('autoclose', newState);
+        newButton.checked = newState;
+
+        // Cambia el color del botón en función del estado actual
+        newButton.setAttribute("style", `background-color: ${newState ? 'rgb(40, 192, 103)' : 'gray'} !important; z-index: 1055;`);
+        setTimeout(existe,500);
+    });
+}
+
+// Llama a la función para iniciar la configuración de autoclose
+autoclose();
+
+}
+
+    const observer = new MutationObserver((mutations, obs) => {
+        const originalButton = document.querySelector("#BotonAutoBuscar");
+        if (originalButton && !document.querySelector('button[title="Skip"]')) {
+            addClonedButton();
+            existe()
+            // obs.disconnect(); // Descomenta esta línea si solo quieres que se ejecute una vez
+        }
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
+function existe() {
+if(GM_getValue('autoclose', true)){
+var name_task0 = document.querySelector("div > div > app-action-loader > app-open-ended > div > div.head-container > app-action-modal-header > div > div > p");
+var primer_skip = document.querySelector("button.true.text-sm.font-bold.w-36.md\\:text-base.btn.btn-secondary.text-blue-dark.skip.ng-star-inserted");
+var campo_text = document.querySelector("#response");
+var name_text0 = document.querySelector('div.bg-body-light:nth-child(2)');
+if(name_task0 && campo_text){
+    var name_task = document.querySelector("div > div > app-action-loader > app-open-ended > div > div.head-container > app-action-modal-header > div > div > p").textContent;
+    var name_includes = name_task.substring(0, name_task.length);
+    GM_setValue('name_task', name_includes);
+//Cerramos la ventana
+    document.querySelector("div > div > app-action-loader > app-open-ended > div > div.head-container > app-action-modal-header > div > button").click();
+    setTimeout(buscar_skip,5000);
+
+}else if(name_text0 && campo_text){
+    var name_text = document.querySelector('div.bg-body-light:nth-child(2)').textContent;
+    name_includes = name_text.substring(0, name_text.length / 2);
+    GM_setValue('name_task', name_includes);
+    setTimeout(buscar_skip,500);
+}
+else{
+    console.log("No Existe");
+    setTimeout(existe,2000);
+  }
+ }
+}
+function buscar_skip() {
+var divContainer = document.querySelector("#divContainer > div");
+var elements = divContainer.querySelectorAll("div"); // Seleccionamos todos los div hijos
+
+var text = GM_getValue('name_task');
+    console.log(text)
+var foundElement = null;
+
+// Recorremos todos los div hijos dentro de #divContainer
+for (var i = 0; i < elements.length; i++) {
+    if (elements[i].textContent.includes(text)) {
+        foundElement = elements[i]; // Guardamos el elemento encontrado
+        break;
+    }
+}
+
+if (foundElement) {
+    // Obtenemos el siguiente elemento div
+    var nextElement = foundElement //.nextElementSibling;
+
+    if (nextElement) {
+        // Buscamos el botón dentro del siguiente div
+        var button = nextElement.querySelectorAll("button");
+
+        if (button) {
+            console.log("Botón encontrado:", button.length);
+            button[1].click();; // Hacemos clic en el botón encontrado
+            setTimeout(existe,5000);
+        } else {
+            console.log("No se encontró un botón en el siguiente div.")
+            console.log(nextElement)
+            setTimeout(existe,5000);
+        }
+    } else {
+        console.log("No hay un siguiente elemento disponible.")
+        setTimeout(existe,5000);
+    }
+} else {
+    setTimeout(next_task,1000);
+    console.log("No se encontró el texto en ningún elemento.")
+    setTimeout(existe,5000);
+ }
+
+function next_task() {
+var divContainer = document.querySelector("#divContainer > div");
+var elements = divContainer.querySelectorAll("div"); // Seleccionamos todos los div hijos
+var foundElement = null;
+for (var i = 0; i < elements.length; i++) {
+    if (elements[i]) {
+        foundElement = elements[i]; // Guardamos el elemento encontrado
+        break;
+    }
+}
+if (foundElement) {
+    // Obtenemos el siguiente elemento div
+    var nextElement = foundElement //.nextElementSibling;
+
+    if (nextElement) {
+        // Buscamos el botón dentro del siguiente div
+        var button = nextElement.querySelector("button");
+
+        if (button) {
+            console.log("Botón encontrado:", button.textContent);
+            button.click();; // Hacemos clic en el botón encontrado
+        }
+    }
+  }
+}
+
+}

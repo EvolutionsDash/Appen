@@ -551,6 +551,7 @@ setTimeout(create, 5000);
 
 }
 
+var puerta = true
 function observarCambios() {
 const actionLoader = document.querySelector("div > div > app-action-loader");
 

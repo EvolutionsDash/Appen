@@ -551,6 +551,37 @@ setTimeout(create, 5000);
 
 }
 
+function observarCambios() {
+const actionLoader = document.querySelector("div > div > app-action-loader");
+
+if (actionLoader) {
+    const responseElement = document.querySelector("#response");
+    if (responseElement) {
+   //     console.log("El elemento #response existe.");
+    } else {
+        puerta = false
+   //     console.log("El elemento #response no existe.");
+    }
+} else {
+        puerta = true
+     //   console.log("El elemento app-action-loader no existe.");
+}
+}
+const observer2 = new MutationObserver((mutations, obs) => {
+        const modal = document.querySelector("div > div > app-action-loader");
+        const modal2 = document.querySelector("div > div.modal-content")
+        if (modal) {
+            observarCambios();
+            //obs.disconnect(); // Descomenta esta línea si solo quieres que se ejecute una vez
+        }else if(modal2){
+            puerta = true
+}
+    });
+    observer2.observe(document.body, {
+        childList: true,
+        subtree: false
+    });
+
 function addClonedButton() {
 var originalButton = document.querySelector("#BotonAutoBuscar");
 var newButton = originalButton.cloneNode(true);
@@ -626,7 +657,11 @@ if(name_task0 && campo_text){
     GM_setValue('name_task', name_includes);
 //Cerramos la ventana
     document.querySelector("div > div > app-action-loader > app-open-ended > div > div.head-container > app-action-modal-header > div > button").click();
-    setTimeout(buscar_skip,5000);
+    if(puerta){
+        setTimeout(buscar_skip,500);
+    }else{
+        setTimeout(buscar_skip,5000);
+        }
 
 }else if(name_text0 && campo_text){
     var name_text = document.querySelector('div.bg-body-light:nth-child(2)').textContent;
@@ -635,7 +670,6 @@ if(name_task0 && campo_text){
     setTimeout(buscar_skip,500);
 }
 else{
-    console.log("No Existe");
     setTimeout(existe,2000);
   }
  }

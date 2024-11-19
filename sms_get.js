@@ -16,6 +16,7 @@ var muestra = document.querySelector("#main-content > article > div.center-colum
 if(muestra){
 if(muestra.innerText==="Let’s get you verified"){
 
+var crow_global = "https://daisysms.com/stubs/handler_api.php?api_key=gjIpsXdLN1wGEqVBo4KCbQ0nfoOQrX&action=getNumber&service=sx"
 var balance = "https://daisysms.com/stubs/handler_api.php?api_key=vUwcZpeVYuDygxflOYhJsceZullKpW&action=getBalance"
 var crow_tmo = "https://daisysms.com/stubs/handler_api.php?api_key=vUwcZpeVYuDygxflOYhJsceZullKpW&action=getNumber&service=sx&carriers=tmo"
 var crow_att = "https://daisysms.com/stubs/handler_api.php?api_key=vUwcZpeVYuDygxflOYhJsceZullKpW&action=getNumber&service=sx&carriers=att"

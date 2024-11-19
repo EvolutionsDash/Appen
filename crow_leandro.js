@@ -908,7 +908,7 @@ clickAllCheckboxesExcept("38-45");
 
 function enviar(){
 var enviar1 = document.querySelector('div.primaryTitle:nth-child(1)');
-enviar1.click();
+ setTimeout(function(){ enviar1.click();},100)
 }
 
 // Selecciona el elemento usando el selector CSS

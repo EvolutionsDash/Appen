@@ -661,7 +661,7 @@ if(name_task0 && campo_text){
     if(puerta){
         setTimeout(buscar_skip,500);
     }else{
-        setTimeout(buscar_skip,5000);
+        setTimeout(buscar_skip,10000);
         }
 
 }else if(name_text0 && campo_text){

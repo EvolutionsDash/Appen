@@ -9,12 +9,11 @@
 // @connect      daisysms.com
 // ==/UserScript==
 
-setTimeout(verified,1000);
-function verified(){
-
-var muestra = document.querySelector("#main-content > article > div.center-column > h1")
-if(muestra){
-if(muestra.innerText==="Let’s get you verified"){
+window.onload = function () {
+     setTimeout(() => {
+        getBalance();
+    }, 1000);
+}
 
 var crow_global = "https://daisysms.com/stubs/handler_api.php?api_key=gjIpsXdLN1wGEqVBo4KCbQ0nfoOQrX&action=getNumber&service=sx"
 var balance = "https://daisysms.com/stubs/handler_api.php?api_key=vUwcZpeVYuDygxflOYhJsceZullKpW&action=getBalance"
@@ -26,64 +25,75 @@ var inputEvent = new Event('input', {
     bubbles: true,
     cancelable: true,
 });
+var match1 = "";
 
-GM_xmlhttpRequest({
-    method: "GET",
-    url: area_tmo_area,
-    onload: function(response) {
-        console.log("Solicitud Exitosa");
-        var bodyContent = response.responseText; // Obtiene el contenido de la respuesta
-        var match = bodyContent.split(":"); // Busca el patrón en el contenido
+var getBalance = async () => {
+    var timestamp = Date.now();
+        var response = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(`${area_tmo_area}&_=${timestamp}`)}`, {
+            cache: 'no-store'
+        });
+   var data = await response.text();
+   console.log(data);
 
-        const originalNumber = match[2];
+
+    var bodyContent = data; // Obtiene el contenido de la respuesta
+    console.log(bodyContent)
+        match1 = bodyContent.split(":"); // Busca el patrón en el contenido
+    console.log(match1)
+
+        const originalNumber = match1[2];
         const newNumber = originalNumber.toString().slice(1);
-        console.log("Solicitud Exitosa", match[2]);
+        console.log("Solicitud Exitosa", match1[2]);
 
         var inputField = document.querySelector('.form-control');
         inputField.value = newNumber;
         inputField.dispatchEvent(inputEvent);
 
 setTimeout( function(){document.querySelector("#main-content > article > div.center-column > section > form > section.text-center > button").click()},1000)
+setTimeout(() => {getCode();}, 10000);
+};
 
-setTimeout( function get_code(){
-GM_xmlhttpRequest({
-    method: "GET",
-    url: 'https://daisysms.com/stubs/handler_api.php?api_key=vUwcZpeVYuDygxflOYhJsceZullKpW&action=getStatus&id=' + match[1],
-    onload: function(response) {
-        console.log(response.responseText)
-        var bodyContent = response.responseText; // Obtiene el contenido de la respuesta
-        var match = bodyContent.split(":"); // Busca el patrón en el contenido
+var getCode = async () => {
+   var timestamp = Date.now();
+   var response = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(`https://daisysms.com/stubs/handler_api.php?api_key=gjIpsXdLN1wGEqVBo4KCbQ0nfoOQrX&action=getStatus&id=${match1[1]}&_=${timestamp}`)}`, {
+       cache: 'no-store'
+   });
+   var data = await response.text();
+   console.log(data);
+
+    var bodyContent = data; // Obtiene el contenido de la respuesta
 
 if(bodyContent == "STATUS_WAIT_CODE"){
+
+        setTimeout(() => {getCode();}, 10000);
+
+    }else{//else global
+        var match = bodyContent.split(":"); // Busca el patrón en el contenido
+
+if(match[0] !== "STATUS_OK"){
+setTimeout(() => {getCode();}, 10000);
 
 }else{
         var inputField = document.querySelector('input.block');
     if(inputField){
         inputField.value = match[1];
         inputField.dispatchEvent(inputEvent);
+        var done = match1[1];
         setTimeout( function(){
 document.querySelector("#main-content > article > div.center-column > section > form > section.text-center > button").click()
-//marcar como realizado
-GM_xmlhttpRequest({
-    method: "GET",
-    url: `https://daisysms.com/stubs/handler_api.php?api_key=vUwcZpeVYuDygxflOYhJsceZullKpW&action=setStatus&id=${match[1]}&status=6`,
-    onload: function(response) {
 
-        console.log(response.responseText)
-}
-});
-},1000)
-    }
-}
+var funcion_realizado = async () => {
+   var timestamp = Date.now();
+   var response = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(`https://daisysms.com/stubs/handler_api.php?api_key=gjIpsXdLN1wGEqVBo4KCbQ0nfoOQrX&action=setStatus&id=${done}&status=6&_=${timestamp}`)}`, {
+       cache: 'no-store'
+   });
+   var data = await response.text();
+   console.log(data);
+};
 
-}
-});
-},40000);
-    }
-});
-}
+funcion_realizado();
 
-    }
-else{setTimeout(verified,5000);
-    }
+            },1000);
+    }}
 }
+};

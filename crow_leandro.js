@@ -23,6 +23,170 @@ location.href ='https://crowdtap.com/auth/account-create-email';
 }
 
 else if(window.location.href.includes('dashboard')){
+//cobro
+(function() {
+    'use strict';
+
+var ventana = false;
+function url_change(){
+GM_xmlhttpRequest({
+        method: "GET",
+        url: "https://litport.net/sys/rotate-ip?key=429c06fe209fb1a62d5d7829d9078b23",
+        onload: function(response) {
+            console.log(response.responseText);
+        },
+        onerror: function(error) {
+            console.error(error);
+        }
+    });
+}
+    // Función para abrir nueva pestaña y monitorearla
+    function openAndMonitorTab(url, checkSelector) {
+        const tab = GM_openInTab(url, { active: true, insert: true });
+
+        tab.onload = function() {
+            const checkExistence = setInterval(() => {
+                const element = tab.document.querySelector(checkSelector);
+                if (element) {
+                    clearInterval(checkExistence);
+                    console.log("Elemento encontrado, cerrando pestaña...");
+                    tab.close();
+                    ventana = true
+                    url_change()
+                }
+            }, 1000);
+
+            setTimeout(() => {
+                clearInterval(checkExistence);
+                console.log("Tiempo excedido, cerrando pestaña...");
+                tab.close();
+            }, 300000);
+        };
+    }
+
+    // Función para clonar el botón y agregar la nueva funcionalidad
+    function addClonedButton() {
+        // Verificar si existe un elemento con el texto específico
+        const specificText = 'Minimum'; // Cambia este texto
+        const elementWithText = [...document.querySelectorAll('*')].find(el => el.textContent.includes(specificText));
+
+        if (elementWithText) {
+            console.log("El texto específico está presente. El botón no se agregará.");
+            return; // Salir de la función si el texto está presente
+        }
+
+        // Buscar todos los botones que coincidan con el selector
+        const buttons = document.querySelector('button.bg-blue-dark');
+
+        // Verificar que existan al menos dos botones
+        if (buttons) {
+            // Seleccionar el segundo botón
+            const originalButton = buttons;
+
+            // Clonar el botón
+            const newButton = originalButton.cloneNode(true);
+
+            // Modificar el texto y atributos del nuevo botón
+            newButton.textContent = 'Verified';
+            newButton.setAttribute('aria-label', 'Verified');
+
+            // Agregar la funcionalidad al nuevo botón
+            newButton.addEventListener('click', () => {
+                const urlToOpen = 'https://crowdtap.com/auth/get-verified'; // Cambia esta URL
+                const elementToCheck = '#div.success-animation-inner'; // Cambia este selector
+                openAndMonitorTab(urlToOpen, elementToCheck);
+            });
+
+            // Insertar el nuevo botón después del segundo botón
+            originalButton.parentNode.insertBefore(newButton, originalButton.nextSibling);
+
+            // Agregar un pequeño margen entre los botones
+            newButton.style.marginLeft = '10px';
+        }
+    }
+
+    // Agregar el botón cuando la página esté lista
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', addClonedButton);
+    } else {
+        addClonedButton();
+    }
+
+    // Observador de mutaciones para manejar carga dinámica
+    const observer = new MutationObserver((mutations, obs) => {
+        const originalButton = document.querySelector('button.bg-blue-dark');
+        if (originalButton && !document.querySelector('button[aria-label="Verified"]')) {
+            addClonedButton();
+            //Boton check
+            var checkbox = document.getElementById('check-1');
+            if (checkbox) {
+                checkbox.checked = true;
+                checkbox.dispatchEvent(new Event('change'));
+            }
+            // obs.disconnect(); // Descomenta esta línea si solo quieres que se ejecute una vez
+        }
+    });
+
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+
+
+function fetchPublicIP(callback) {
+    GM_xmlhttpRequest({
+        method: 'GET',
+        url: 'https://api.ipify.org?format=json&timestamp=' + new Date().getTime(), // Agregar timestamp para evitar la caché
+        onload: function(response) {
+            if (response.status === 200) {
+                const data = JSON.parse(response.responseText);
+                callback(data.ip);
+            } else {
+                console.error('Error al obtener la dirección IP:', response.statusText);
+                callback(null);
+            }
+        },
+        onerror: function(error) {
+            console.error('Error al realizar la solicitud:', error);
+            callback(null);
+        }
+    });
+}
+
+// Variable para almacenar la dirección IP actual
+let currentIP = '';
+
+
+// Función para verificar cambios en la dirección IP
+function checkIPChange() {
+    fetchPublicIP(function(newIP) {
+        if (newIP !== null && newIP !== currentIP) {
+            console.log('La dirección IP ha cambiado:', newIP);
+console.log(ventana)
+if(ventana){
+clickCobrar();
+}
+            currentIP = newIP;
+        } else {
+            //console.log('La dirección IP sigue siendo la misma:', currentIP);
+        }
+    });
+}
+
+// Verificar cambios cada cierto tiempo (por ejemplo, cada 5 segundos)
+setInterval(checkIPChange, 4000);
+
+function clickCobrar() {
+    const boton = document.querySelector('button.bg-blue-dark');
+    if (boton) {
+        setTimeout(() => {
+            boton.click();
+        }, Math.random() * 100 + 50); // Retraso aleatorio entre 50-150ms
+    }
+}
+
+})();
+
 
 var puerta = false
 function pre_encuesta(){

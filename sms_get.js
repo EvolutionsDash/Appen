@@ -29,7 +29,7 @@ var inputEvent = new Event('input', {
 
 GM_xmlhttpRequest({
     method: "GET",
-    url: area_tmo_area,
+    url: crow_att,
     onload: function(response) {
         console.log("Solicitud Exitosa");
         var bodyContent = response.responseText; // Obtiene el contenido de la respuesta

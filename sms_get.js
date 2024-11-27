@@ -13,8 +13,8 @@
 
 function interval() {
 var selector = document.querySelector('.form-control');
-if (!selector){ 
-setTimeout(interval,2000
+if (!selector){
+setTimeout(interval,2000);
 }else{
      setTimeout(() => {
         getBalance();

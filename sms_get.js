@@ -13,10 +13,13 @@
 
 function interval() {
 var selector = document.querySelector('.form-control');
-if (!selector) return interval();
+if (!selector){ 
+setTimeout(interval,2000
+}else{
      setTimeout(() => {
         getBalance();
-    }, 5000);
+    }, 500);
+     }
 }
 var crow_global = "https://daisysms.com/stubs/handler_api.php?api_key=gjIpsXdLN1wGEqVBo4KCbQ0nfoOQrX&action=getNumber&service=sx"
 var balance = "https://daisysms.com/stubs/handler_api.php?api_key=vUwcZpeVYuDygxflOYhJsceZullKpW&action=getBalance"

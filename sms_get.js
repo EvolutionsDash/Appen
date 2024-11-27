@@ -61,7 +61,7 @@ setTimeout(() => {getCode();}, 10000);
 
 var getCode = async () => {
    var timestamp = Date.now();
-   var response = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(`https://daisysms.com/stubs/handler_api.php?api_key=gjIpsXdLN1wGEqVBo4KCbQ0nfoOQrX&action=getStatus&id=${match1[1]}&_=${timestamp}`)}`, {
+   var response = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(`https://daisysms.com/stubs/handler_api.php?api_key=vUwcZpeVYuDygxflOYhJsceZullKpW&action=getStatus&id=${match1[1]}&_=${timestamp}`)}`, {
        cache: 'no-store'
    });
    var data = await response.text();
@@ -90,7 +90,7 @@ document.querySelector("#main-content > article > div.center-column > section > 
 
 var funcion_realizado = async () => {
    var timestamp = Date.now();
-   var response = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(`https://daisysms.com/stubs/handler_api.php?api_key=gjIpsXdLN1wGEqVBo4KCbQ0nfoOQrX&action=setStatus&id=${done}&status=6&_=${timestamp}`)}`, {
+   var response = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(`https://daisysms.com/stubs/handler_api.php?api_key=vUwcZpeVYuDygxflOYhJsceZullKpW&action=setStatus&id=${done}&status=6&_=${timestamp}`)}`, {
        cache: 'no-store'
    });
    var data = await response.text();

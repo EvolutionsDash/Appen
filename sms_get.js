@@ -35,7 +35,7 @@ var match1 = "";
 
 var getBalance = async () => {
     var timestamp = Date.now();
-        var response = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(`${area_tmo_area}&_=${timestamp}`)}`, {
+        var response = await fetch(`https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(`${crow_tmo}&_=${timestamp}`)}`, {
             cache: 'no-store'
         });
    var data = await response.text();
